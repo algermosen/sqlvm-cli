@@ -1,37 +1,12 @@
 #!/bin/bash
 
-VM_IMAGE="$HOME/sqlvm/ubuntu.img"
-LOGFILE="$HOME/sqlvm/vm.log"
+SUBCMD="$1"
+shift
 
-case "$1" in
-  up)
-    echo "🟢 Starting SQL VM..."
-    nohup qemu-system-x86_64 \
-      -m 4096 \
-      -smp 2 \
-      -cpu qemu64 \
-      -nographic \
-      -drive file="$VM_IMAGE",format=qcow2 \
-      -net nic -net user,hostfwd=tcp::2222-:22,hostfwd=tcp::1433-:1433 \
-      > "$LOGFILE" 2>&1 &
-    echo "VM started in background. Logs at: $LOGFILE"
-    ;;
-  down)
-    echo "🔴 Stopping SQL VM..."
-    pkill -f qemu-system-x86_64 && echo "VM stopped." || echo "No VM running."
-    ;;
-  status)
-    if pgrep -f qemu-system-x86_64 > /dev/null; then
-      echo "🟡 SQL VM is running."
-    else
-      echo "⚫ SQL VM is not running."
-    fi
-    ;;
-  init)
-    bash "$HOME/bin/sqlvm/scripts/init-vm.sh"
-    ;;
-  *)
-    echo "Usage: sqlvm {up|down|status}"
-    ;;
-esac
+SCRIPT_PATH="$HOME/bin/sqlvm/scripts/${SUBCMD}.sh"
 
+if [[ -f "$SCRIPT_PATH" ]]; then
+  bash "$SCRIPT_PATH" "$@"
+else
+  bash "$HOME/bin/sqlvm/scripts/help.sh" "$SUBCMD"
+fi

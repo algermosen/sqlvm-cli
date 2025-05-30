@@ -27,7 +27,7 @@ To use `sqlvm`, you need:
 
 - **TMUX (Optional: if you want to run the VM interactively)**
 ```bash
-  brew install qemu
+  brew install tmux
 ```
 
 ---
