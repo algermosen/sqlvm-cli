@@ -27,6 +27,9 @@ case "$1" in
       echo "⚫ SQL VM is not running."
     fi
     ;;
+  init)
+    bash "$HOME/bin/sqlvm/scripts/init-vm.sh"
+    ;;
   *)
     echo "Usage: sqlvm {up|down|status}"
     ;;
