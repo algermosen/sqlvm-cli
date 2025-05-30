@@ -49,6 +49,9 @@ $DRY_RUN || cp sqlvm "$TARGET_BIN/sqlvm"
 log "Making sqlvm executable"
 $DRY_RUN || chmod +x "$TARGET_BIN/sqlvm"
 
+log "Making release and version scripts executable"
+$DRY_RUN || chmod +x release.sh version.sh
+
 log "Making all subcommands in scripts/ executable"
 $DRY_RUN || find scripts/ -type f -name '*.sh' -exec chmod +x {} \;
 

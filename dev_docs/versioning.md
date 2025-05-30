@@ -1,3 +1,7 @@
+Intructions for when and how the version number should be changed.
+
+---
+
 🔼 When to bump:
 0.0.x → 0.0.x+1: Small tweaks, fixes, help messages, flags
 

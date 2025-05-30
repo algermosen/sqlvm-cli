@@ -3,13 +3,14 @@
 SUBCMD="$1"
 shift
 
-source "$HOME/bin/sqlvm/version.sh"
+PWD=$(pwd)
+
+source "$PWD/version.sh"
 if [[ "$SUBCMD" == "--version" ]]; then
   echo "$SQLVM_VERSION"
   exit 0
 fi
 
-PWD=$(pwd)
 SCRIPT_PATH="$PWD/scripts/${SUBCMD}.sh"
 
 if [[ -f "$SCRIPT_PATH" ]]; then
