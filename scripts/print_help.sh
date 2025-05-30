@@ -13,12 +13,12 @@ Description:
 
   You can find compatible iso files from https://releases.ubuntu.com/22.04/
 
-  Default: ubuntu-22.04.5-live-server-amd64.iso
+  Default [ISO_NAME]: ubuntu-22.04.5-live-server-amd64.iso
 
 Flags:
-  --disk-size SIZE     Set the virtual disk size (e.g., 20G)
-  --force              Recreate ISO/disk even if they exist
-  --help               Show this help message
+  --disk-size SIZE     Set the virtual disk size (default: 20G)
+  --force              Recreate ISO/disk even if they exist (default: false)
+  --help               Show this help message 
 
 Examples:
   sqlvm init
@@ -55,7 +55,7 @@ Description:
     Stops the SQL VM gracefully or forcefully.
 
 Flags:
-    --force             Force stop the VM without waiting
+    --force             Force stop the VM without waiting for graceful shutdown (default: false)
     --help              Show this help message
 
 Examples:
@@ -72,7 +72,7 @@ Description:
     Restarts the SQL VM by stopping and starting it again.
 
 Flags:
-    --force             Force stop the VM without waiting
+    --force             Force stop the VM without waiting for graceful shutdown (default: false)
     --help              Show this help message
 
 Examples:
@@ -110,6 +110,42 @@ Examples:
   sqlvm ssh --user myuser --port 2223
 EOF
   ;;
+ip)
+  cat <<EOF
+Usage:
+  sqlvm ip [--port]
+
+Description:
+  Displays the IP address or port of the SQL VM.
+
+Flags:
+  --port             Show only the forwarded port (default: 1433)
+  --help             Show this help message
+
+Examples:
+  sqlvm ip
+  sqlvm ip --port
+EOF
+  ;;
+  ready)
+  cat <<EOF
+Usage:
+  sqlvm ready [--host HOST] [--port PORT]
+
+Description:
+  Checks if the SQL VM is ready to accept connections.
+
+Flags:
+  --host HOST        Specify the host (default: 127.0.0.1)
+  --port PORT        Specify the port (default: 1433)
+  --help             Show this help message
+
+Examples:
+  sqlvm ready
+  sqlvm ready --host
+
+EOF
+  ;;
 uninstall)
   cat <<EOF
 Usage:
@@ -119,14 +155,31 @@ Description:
   Uninstalls the SQL VM from your system.
 
 Flags:
-  --dry-run           Show what would be done without making changes
-  --force-user        Force uninstall for the current user
+  --dry-run           Show what would be done without making changes (default: false)
+  --force-user        Force uninstall for the current user even if the VM is running (default: false)
   --help              Show this help message
 
 Examples:
   sqlvm uninstall
   sqlvm uninstall --dry-run
   sqlvm uninstall --force-user
+EOF
+  ;;
+  backup)
+  cat <<EOF
+Usage:
+  sqlvm backup [--output FILE]
+
+Description:
+  Backs up the SQL VM data to a specified file.
+
+Flags:
+  --output FILE       Specify the output file for the backup (default: sqlvm_backup.tar.gz)
+  --help              Show this help message
+
+Examples:
+  sqlvm backup
+  sqlvm backup --output my_backup.tar.gz
 EOF
   ;;
 logs)
