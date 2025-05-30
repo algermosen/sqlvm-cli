@@ -21,7 +21,7 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     -*|--*)
-      echo "❌ Unknown flag: $1"
+      echo "Unknown flag: $1"
       exit 1
       ;;
     *)
@@ -37,5 +37,5 @@ if $SHOW_HELP; then
 fi
 
 CMD=(ssh -p "$PORT" "$USER@localhost")
-echo "🔐 Connecting to VM via: ${CMD[*]}"
+echo "Connecting to VM via: ${CMD[*]}"
 exec "${CMD[@]}"
