@@ -3,10 +3,11 @@
 SUBCMD="$1"
 shift
 
-SCRIPT_PATH="$HOME/bin/sqlvm/scripts/${SUBCMD}.sh"
+PWD=$(pwd)
+SCRIPT_PATH="$PWD/scripts/${SUBCMD}.sh"
 
 if [[ -f "$SCRIPT_PATH" ]]; then
   bash "$SCRIPT_PATH" "$@"
 else
-  bash "$HOME/bin/sqlvm/scripts/help.sh" "$SUBCMD"
+  bash "$PWD/scripts/help.sh" "$SUBCMD"
 fi

@@ -9,7 +9,7 @@ fi
 
 echo "🛠 Available commands:"
 
-for f in "$HOME/bin/sqlvm/scripts/"*.sh; do
+for f in "$(pwd)/scripts/"*.sh; do
     name=$(basename "$f" .sh)
     printf "  %-12s\n" "$name"
 done
