@@ -38,6 +38,7 @@ Flags:
     --headless          Run in headless mode (no GUI)
     --memory SIZE       Set the amount of memory (default: 4096M)
     --cpus COUNT        Set the number of CPUs (default: 2)
+    --port PORT         Set the SSH port (default: 2222)
     --help              Show this help message
 
 Examples:
@@ -127,7 +128,7 @@ Examples:
   sqlvm ip --port
 EOF
   ;;
-  ready)
+ready)
   cat <<EOF
 Usage:
   sqlvm ready [--host HOST] [--port PORT]
@@ -144,6 +145,25 @@ Examples:
   sqlvm ready
   sqlvm ready --host
 
+EOF
+  ;;
+rebuild)
+  cat <<EOF
+Usage:
+  sqlvm rebuild [--disk-size SIZE] [--force]
+
+Description:
+  Rebuilds the SQL VM from scratch, removing existing data and configurations.
+
+Flags:
+  --disk-size SIZE   Set the virtual disk size (default: 20G)
+  --force            Force rebuild even if the VM is running (default: false)
+  --help             Show this help message
+
+Examples:
+  sqlvm rebuild
+  sqlvm rebuild --disk-size 30G
+  sqlvm rebuild --force
 EOF
   ;;
 uninstall)
@@ -165,7 +185,7 @@ Examples:
   sqlvm uninstall --force-user
 EOF
   ;;
-  backup)
+backup)
   cat <<EOF
 Usage:
   sqlvm backup [--output FILE]
@@ -208,7 +228,7 @@ Description:
   Displays help for a specific command.
 
 Commands:
-  init, up, down, uninstall, logs
+  init, up, down, uninstall, logs, ssh, ip, ready, rebuild, status, backup, restart
 
 Examples:
   sqlvm help init
@@ -216,6 +236,11 @@ Examples:
   sqlvm help down
   sqlvm help uninstall
   sqlvm help logs
+EOF
+  ;;
+--version | -v)
+  cat <<EOF
+Show SQL VM CLI Version
 EOF
   ;;
 *)

@@ -7,6 +7,7 @@ SHOW_HELP=false
 HEADLESS=false
 MEMORY=4096
 CPUS=2
+PORT=2222
 POSITIONAL=()
 
 # Parse flags
@@ -22,6 +23,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --cpus)
       CPUS="$2"
+      shift 2
+      ;;
+    --port)
+      PORT="$2"
       shift 2
       ;;
     --help|-h)
@@ -50,7 +55,7 @@ QEMU_ARGS=(
   -cpu host
   -boot c
   -drive file=ubuntu.img,format=qcow2
-  -net nic -net user,hostfwd=tcp::2222-:22
+  -net nic -net user,hostfwd=tcp::$PORT-:22
 )
 
 if $HEADLESS; then
